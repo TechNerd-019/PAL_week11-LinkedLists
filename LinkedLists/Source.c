@@ -3,6 +3,8 @@
 
 #include "McDonalds.h"
 
+// PAL. Monday, Nov. 14, 2022.
+
 void addItem(PLISTNODE*, int);
 
 int main(void) {
