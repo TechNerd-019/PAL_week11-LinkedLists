@@ -57,21 +57,44 @@ void addItem(PLISTNODE *list, int var) {
 void deleteItem(PLISTNODE *list, int var) {
 
 	PLISTNODE current = *list;
-
+	
+	//Only for the first node.
 	if (current->age == var) {
 		if (current->next != NULL) {
 
+			puts("Not the first node.");
 			*list = current->next;
 		}
 		else {
+			puts("Item deleted.");
 			*list = NULL;
-		}
-	}
-	else {
+		}	
+		free(current);
 		return;
 	}
+
 	
+	
+	//If it is not the first node.
+	PLISTNODE prevItem = NULL;
+	int count = 0;
+	// Iterate until end of list and the var we are looking for is not found.
+	while (current != NULL && current->age != var) {
+
+		prevItem = current;
+		current = current->next;
+		count++;
+	}
+
+	if (current == NULL) {
+		puts("End of the list. Node does not exist.");
+		return;
+	}
+	//Dereferencing pointer to go to the next next node, (the node after the node).
+	prevItem->next = current->next;
+	puts("Item deleted at node number %d.", count);
 	free(current);
+
 	return;
 }
 
