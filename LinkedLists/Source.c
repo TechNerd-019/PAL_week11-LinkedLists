@@ -32,8 +32,12 @@ void addItem(PLISTNODE *list, int var) {
 
 		PLISTNODE newNode = NULL;		// Initializing a new node into our list.
 		newNode = (PLISTNODE)malloc(sizeof(LISTNODE));		//Assigning memory in the heap.
+		{
+			fprintf(stderr, "Error allocating memory");
+			exit(EXIT_FAILURE);
+		}
 		newNode->age = var;				// The new node will be assigning the items of the list.
-		newNode->next = *list;			// The new node will point to *list, which dereferences to NULL.
+		newNode->next = *list;			// The new node will point to *list, which dereferences to NULL. newNode->next = NULL; causes same effect.
 										// This means that the newItem will now point to NULL.
 										// So the *list is now pointing to the newItem.
 		*list = newNode;
@@ -45,6 +49,11 @@ void addItem(PLISTNODE *list, int var) {
 		}
 		PLISTNODE newNode = NULL;		// Initializing a new node into our list.
 		newNode = (PLISTNODE)malloc(sizeof(LISTNODE));		//Assigning memory in the heap.
+		if (!newNode)
+		{
+			fprintf(stderr, "Error allocating memory");
+			exit(EXIT_FAILURE);
+		}
 		newNode->age = var;				// The new node will be assigning the items of the list.
 		newNode->next = NULL;			// The new node will point to NULL.
 		current->next = newNode;
